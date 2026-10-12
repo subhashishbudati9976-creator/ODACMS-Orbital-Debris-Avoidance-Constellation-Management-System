@@ -1,0 +1,4 @@
+fastapi
+pydantic
+asyncpg
+python-dotenv

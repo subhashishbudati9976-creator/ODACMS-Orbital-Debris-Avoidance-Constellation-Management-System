@@ -1,0 +1,638 @@
+/* ── Help Tutorial Overlay ── */
+.help-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.help-modal {
+  background: linear-gradient(135deg, #0d1025 0%, #131833 100%);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 229, 255, 0.1);
+  position: relative;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.help-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #888;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-close:hover {
+  border-color: #ff3366;
+  color: #ff3366;
+  background: rgba(255, 51, 102, 0.1);
+}
+
+.help-step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.help-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.help-dot.active {
+  background: #00e5ff;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.help-dot.done {
+  background: #00ff88;
+}
+
+.help-icon {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.3));
+}
+
+.help-title {
+  color: #00e5ff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 8px;
+  letter-spacing: 1px;
+}
+
+.help-subtitle {
+  color: #888;
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0 0 20px;
+  letter-spacing: 0.5px;
+}
+
+.help-body {
+  color: #ccc;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.help-body p {
+  margin: 0 0 12px;
+}
+
+.help-body .key {
+  display: inline-block;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: #00e5ff;
+}
+
+.help-body .warn {
+  color: #ffaa00;
+}
+
+.help-body .crit {
+  color: #ff3366;
+}
+
+.help-body .safe {
+  color: #00ff88;
+}
+
+.help-what {
+  color: #00e5ff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 16px 0 6px;
+  padding: 4px 0 4px 10px;
+  border-left: 3px solid rgba(0, 229, 255, 0.5);
+  font-family: monospace;
+}
+
+.help-what:first-child {
+  margin-top: 0;
+}
+
+.help-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.help-btn {
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: #00e5ff;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+}
+
+.help-btn:hover {
+  background: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+.help-btn.primary {
+  background: rgba(0, 229, 255, 0.2);
+  border-color: #00e5ff;
+}
+
+.help-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.help-page-num {
+  color: #555;
+  font-size: 0.75rem;
+  font-family: monospace;
+}
+
+/* ── Toast Notifications (top-right on desktop) ── */
+.toast-container {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  left: auto;
+  transform: none;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 360px;
+  width: 360px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: toast-in 0.4s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid;
+}
+
+.toast:hover {
+  transform: scale(1.02);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.toast-exit {
+  animation: toast-out 0.3s ease forwards;
+}
+
+@keyframes toast-out {
+  to { opacity: 0; transform: translateY(-30px); }
+}
+
+.toast-info {
+  background: rgba(0, 229, 255, 0.1);
+  border-color: rgba(0, 229, 255, 0.3);
+  color: #00e5ff;
+}
+
+.toast-success {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.3);
+  color: #00ff88;
+}
+
+.toast-warning {
+  background: rgba(255, 170, 0, 0.1);
+  border-color: rgba(255, 170, 0, 0.3);
+  color: #ffaa00;
+}
+
+.toast-danger {
+  background: rgba(255, 51, 102, 0.1);
+  border-color: rgba(255, 51, 102, 0.3);
+  color: #ff3366;
+}
+
+.toast-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.toast-content {
+  flex-grow: 1;
+}
+
+.toast-title {
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-bottom: 2px;
+  letter-spacing: 0.5px;
+}
+
+.toast-msg {
+  font-size: 0.72rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+/* ── Help Button (floating) ── */
+.help-fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00e5ff, #0088ff);
+  border: none;
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 9990;
+  box-shadow: 0 4px 20px rgba(0, 229, 255, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(0, 229, 255, 0.6);
+}
+
+/* ── Report Modal ── */
+.report-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fade-in 0.3s ease;
+}
+
+.report-modal {
+  background: linear-gradient(135deg, #0d1025 0%, #131833 100%);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 20px;
+  padding: 28px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.report-title {
+  color: #00e5ff;
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.report-section {
+  margin-bottom: 16px;
+}
+
+.report-section h4 {
+  color: #ffaa00;
+  font-size: 0.8rem;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+.report-table th {
+  text-align: left;
+  color: #888;
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.report-table td {
+  padding: 6px 8px;
+  color: #ccc;
+  font-family: monospace;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.report-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* -- Threat Alert (center screen) -- */
+.threat-alert-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.2s ease;
+}
+
+.threat-alert-box {
+  background: linear-gradient(135deg, #1a0510 0%, #200818 100%);
+  border: 2px solid #ff3366;
+  border-radius: 20px;
+  padding: 32px 40px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: threat-shake 0.5s ease;
+  box-shadow: 0 0 60px rgba(255, 51, 102, 0.3), 0 0 120px rgba(255, 51, 102, 0.1);
+}
+
+@keyframes threat-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.threat-alert-pulse {
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  border: 2px solid #ff3366;
+  border-radius: 20px;
+  animation: alert-pulse-ring 1.5s ease-in-out infinite;
+}
+
+@keyframes alert-pulse-ring {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.02); }
+}
+
+.threat-alert-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: rgba(255, 51, 102, 0.15);
+  border: 2px solid #ff3366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #ff3366;
+  animation: alert-pulse-ring 1s ease-in-out infinite;
+}
+
+.threat-alert-title {
+  color: #ff3366;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+}
+
+.threat-alert-target {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0 0 4px;
+}
+
+.threat-alert-target span {
+  color: #00e5ff;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.threat-alert-id {
+  color: #666;
+  font-size: 0.75rem;
+  font-family: monospace;
+  margin: 0 0 8px;
+}
+
+.threat-alert-tca {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0 0 16px;
+}
+
+.threat-alert-tca span {
+  color: #ffaa00;
+  font-weight: 700;
+  font-family: monospace;
+  font-size: 1.1rem;
+}
+
+.threat-alert-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.threat-alert-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff3366, #ffaa00);
+  animation: bar-sweep 2s linear infinite;
+  width: 30%;
+  border-radius: 2px;
+}
+
+@keyframes bar-sweep {
+  0% { margin-left: 0; }
+  50% { margin-left: 70%; }
+  100% { margin-left: 0; }
+}
+
+.threat-alert-msg {
+  color: #666;
+  font-size: 0.7rem;
+  margin: 0 0 20px;
+  font-family: monospace;
+}
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+  .help-modal {
+    padding: 20px;
+    max-width: 95vw;
+    border-radius: 14px;
+    max-height: 80vh;
+  }
+
+  .help-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .help-title {
+    font-size: 1.05rem;
+  }
+
+  .help-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .help-body {
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+
+  .help-body .key {
+    font-size: 0.7rem;
+    padding: 1px 7px;
+  }
+
+  .help-what {
+    font-size: 0.6rem;
+    margin: 12px 0 4px;
+    padding: 3px 0 3px 8px;
+  }
+
+  .help-btn {
+    padding: 8px 16px;
+    font-size: 0.7rem;
+    border-radius: 8px;
+  }
+
+  .help-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .help-step-indicator {
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .help-nav {
+    margin-top: 16px;
+  }
+
+  .help-page-num {
+    font-size: 0.65rem;
+  }
+
+  /* Threat alert mobile */
+  .threat-alert-box {
+    padding: 24px 20px;
+    max-width: 90vw;
+    border-radius: 14px;
+  }
+
+  .threat-alert-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+
+  .threat-alert-title {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .threat-alert-target {
+    font-size: 0.8rem;
+  }
+
+  .threat-alert-tca span {
+    font-size: 0.95rem;
+  }
+
+  /* Report modal mobile */
+  .report-modal {
+    padding: 16px;
+    max-width: 95vw;
+    border-radius: 14px;
+  }
+
+  .report-title {
+    font-size: 0.95rem;
+  }
+
+  .report-section h4 {
+    font-size: 0.7rem;
+  }
+
+  .report-table {
+    font-size: 0.65rem;
+  }
+
+  .report-table th,
+  .report-table td {
+    padding: 4px 6px;
+  }
+}
