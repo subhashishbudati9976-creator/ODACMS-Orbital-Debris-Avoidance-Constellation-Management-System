@@ -2,7 +2,7 @@
 
 > **National Space Hackathon 2026** | Autonomous Space Situational Awareness (SSA) Dashboard
 
-A full-stack real-time orbital simulation platform that tracks 6 satellites and 518 debris objects in LEO (Low Earth Orbit), featuring autonomous collision avoidance, 3D WebGL visualization, and mission-critical decision support.....
+A full-stack real-time orbital simulation platform that tracks 6 satellites and 518 debris objects in LEO (Low Earth Orbit), featuring autonomous collision avoidance, 3D WebGL visualization, and mission-critical decision support.......
 
 ---
 
